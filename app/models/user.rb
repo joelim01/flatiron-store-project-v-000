@@ -6,23 +6,24 @@ class User < ActiveRecord::Base
 
   has_many :carts
   has_many :orders, through: :carts
+  belongs_to :current_cart, class_name: 'Cart'
 
-
-  def current_cart
-    self.carts.find_by(status: "current")
-  end
-
-  def current_cart=(cart)
-    if cart && cart.line_items
-      if self.current_cart
-        self.current_cart.line_items = cart.line_items
-        self.current_cart.save
-      else
-        cart.status = "current"
-        cart.save
-      end
-    else
-      self.carts.first_or_create(status: "current").line_items.clear
-    end
-  end
-end
+#
+#   def current_cart
+#     self.carts.find_by(status: "current")
+#   end
+#
+#   def current_cart=(cart)
+#     if cart && cart.line_items
+#       if self.current_cart
+#         self.current_cart.line_items = cart.line_items
+#         self.current_cart.save
+#       else
+#         cart.status = "current"
+#         cart.save
+#       end
+#     else
+#       self.carts.first_or_create(status: "current").line_items.clear
+#     end
+#   end
+ end

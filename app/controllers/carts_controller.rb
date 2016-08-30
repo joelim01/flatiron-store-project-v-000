@@ -8,11 +8,13 @@ class CartsController < ApplicationController
     end
     @cart.status = "submitted"
     @cart.save
+    current_user.current_cart = nil
+    current_user.save
     redirect_to cart_path(@cart)
   end
 
   def show
-    
+
   end
 
 end
